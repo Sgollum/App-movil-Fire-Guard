@@ -1,13 +1,33 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>mapa</ion-title>
-  </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">mapa</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <section class="ion-margin-top text-center">
+    <h1 class="titulo text-white">Fire Guard</h1>
+  </section>
+  <section id="mapa" class="ion-margin-top">
+  </section>
+  <section id="botones" class="ion-margin-top container">
+    <div class="row">
+      <article class="col-12">
+        <ion-button expand="block" class="letra historial">Historial</ion-button>
+      </article>
+    </div>
+    <div class="row">
+      <article class="col-6">
+        <ion-button expand="block" class="letra ion-button-small numeros"><ion-icon name="call-outline"></ion-icon>Policia</ion-button>
+      </article>
+      <article class="col-6">
+        <ion-button expand="block" class="letra ion-button-small numeros"><ion-icon name="call-outline"></ion-icon>Urgencias</ion-button>
+      </article>
+    </div>
+    <div class="row">
+      <article class="col-12 ion-text-center">
+        <ion-button  class="letra ion-button-small numeros "><ion-icon name="call-outline"></ion-icon>Bomberos</ion-button>
+      </article>
+    </div>
+  </section>
+
+
+
 </ion-content>
