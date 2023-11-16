@@ -11,7 +11,11 @@ const routes: Routes = [
   {
     path: 'mapa',
     loadChildren: () => import('./templates/mapa/mapa.module').then( m => m.MapaPageModule)
+  },  {
+    path: 'historial',
+    loadChildren: () => import('./templates/historial/historial.module').then( m => m.HistorialPageModule)
   },
+
 ];
 
 @NgModule({

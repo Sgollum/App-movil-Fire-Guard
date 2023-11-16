@@ -26,13 +26,13 @@
     "@googlemaps/js-api-loader": "^1.16.2",
     "@ionic/angular": "^7.4.3",
     "@ionic/storage-angular": "^4.0.0",
+    "@types/google.maps": "^3.54.8",
     "firebase": "^10.4.0",
     "ionicons": "^7.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
-  }
-,
+  },
   "devDependencies": {
     "@angular-devkit/build-angular": "^16.0.0",
     "@angular-eslint/builder": "^16.0.0",
@@ -40,7 +40,7 @@
     "@angular-eslint/eslint-plugin-template": "^16.0.0",
     "@angular-eslint/schematics": "^16.0.0",
     "@angular-eslint/template-parser": "^16.0.0",
-    "@angular/cli": "^16.0.0",
+    "@angular/cli": "16.2.10",
     "@angular/compiler": "^16.0.0",
     "@angular/compiler-cli": "^16.0.0",
     "@angular/language-service": "^16.0.0",
