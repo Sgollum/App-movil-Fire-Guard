@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { FirebaseService } from 'src/app/services/firebase.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 
 declare var google: any;
@@ -11,22 +13,32 @@ declare var google: any;
 export class MapaPage implements OnInit {
   @ViewChild('map', { static: true }) mapElement!: ElementRef;
   map: any;
-  dangerCircle: any; // Variable para almacenar el círculo de peligro
+  dangerCircle: any; 
   fireMarker: any;
   orangeCircle: any;
 
-  constructor(private interaction: InteractionService) {}
+  constructor(private interaction: InteractionService,
+              private firebaseService: FirebaseService,
+              private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.loadGoogleMapsScript().then(() => {
       this.initMap();
       this.setRandomDangerZone(); // Iniciar la generación de zonas de peligro aleatorias
     });
+    this.route.queryParams.subscribe(params => {
+      const lat = params['lat'];
+      const lng = params['lng'];
+  
+      if (lat && lng) {
+        this.navigateToLocation(lat, lng);
+      }
+    });
   }
-
+//se muestra el mapa con la clave
   private loadGoogleMapsScript(): Promise<void> {
     const script = document.createElement('script');
-    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAXWQjGCFqMyPOFX7qh1Nz3LUSec-PKHwc';
+    script.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAqc_jaJjyy9FyhLGhxcChmJWNzUwXYfFY';
     script.async = true;
     script.defer = true;
 
@@ -36,7 +48,7 @@ export class MapaPage implements OnInit {
       document.head.appendChild(script);
     });
   }
-
+//se muestra el mapa
   private initMap() {
     const mapOptions = {
       center: new google.maps.LatLng(-33.6009271, -70.7088789),
@@ -46,11 +58,14 @@ export class MapaPage implements OnInit {
 
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
   }
-
+//genera los incendios en zonas random del mapa (intento de simulacion arduino)
   private setRandomDangerZone() {
     setInterval(() => {
       const lat = this.getRandomNumber(-56.0, -17.0);
       const lng = this.getRandomNumber(-75.0, -66.0);
+
+      // Llama al método del servicio Firebase para guardar el incendio
+      this.firebaseService.saveFireIncidentToFirestore(lat, lng);
   
       const dangerZoneCenter = new google.maps.LatLng(lat, lng);
   
@@ -101,14 +116,31 @@ export class MapaPage implements OnInit {
   
       const message = `Se generó un incendio en la ubicación: Latitud ${lat.toFixed(6)}, Longitud ${lng.toFixed(6)}`;
       this.interaction.PresentAlert('Alerta de incendio', message);
-    }, 10000); // Ejecutar cada 10 segundos (10000 milisegundos)
+    }, 60000); 
   }
 
-  private showAlert(message: string) {
-    alert(message); // Muestra una alerta con el mensaje proporcionado
-  }
 
   private getRandomNumber(min: number, max: number): number {
     return Math.random() * (max - min) + min;
+  }
+
+// este metodo es para mostrar en el mapa la ubicacion que se marco en el historial
+  navigateToLocation(lat: number, lng: number) {
+    const mapOptions = {
+      center: new google.maps.LatLng(lat, lng),
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+    };
+  
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
+  
+    const marker = new google.maps.Marker({
+      position: new google.maps.LatLng(lat, lng),
+      map: this.map
+    });
+  
+    setTimeout(() => {
+      marker.setMap(null); // Elimina el marcador después de 10 segundos
+    }, 10000);
   }
 }

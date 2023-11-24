@@ -1,10 +1,38 @@
 <ion-header [translucent]="true">
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">historial</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content [fullscreen]="true" class="ion-padding">
+  <header class="">
+    <ion-button id="volver" fill="clear" [routerLink]="['/mapa']" class="icon-button"><ion-icon class="custom-icon" name="arrow-back-circle-outline"></ion-icon></ion-button>
+  </header>
+  <section>
+    <h1 class="text-center text-white titulo">Historial</h1>
+  </section>
+  <section id="historial" class="ion-margin-top">
+    <h4 class="titulo2 text-white ion-text-center">Fire Guard</h4>
+    <hr class="linea">
+    <article class="table-responsive">
+      <table class="table table-striped custom-table" >
+          <thead>
+              <tr>
+                  <th scope="col">Fecha</th>
+                  <th scope="col">Hora</th>
+                  <th scope="col">Lugar</th>
+              </tr>
+          </thead>
+          <tbody>
+                      <tr *ngFor="let incident of fireIncidents" (click)="navigateToMap(incident.lugar.latitude, incident.lugar.longitude)">
+                        <td>{{ incident.fecha }}</td>
+                        <td>{{ incident.hora }}</td>
+                        <td>{{ incident.lugar.latitude }}, {{ incident.lugar.longitude }}</td>
+                      </tr>
+          </tbody>
+      </table>
+    </article>
+  </section>
+  <section id="historial" class="ion-margin-top historial">
+    <h4 class="titulo2 text-white ion-text-center">Estadisticas</h4>
+    <hr class="linea">
+
+  </section>
 </ion-content>

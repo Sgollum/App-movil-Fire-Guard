@@ -1,0 +1,49 @@
+
+.icon-button {
+    --background: transparent; 
+    --box-shadow: none; 
+    --color: inherit; 
+    padding: 0;
+    border: none; 
+    height: 10px;
+}
+.custom-icon {
+    font-size: 30px; 
+    background-color: red; 
+    padding: 8px;
+    border-radius: 50%; 
+}
+.titulo{
+    font-family: 'Roboto', sans-serif; 
+    font-weight: bold;
+    font-size: 35px;
+}
+.titulo2{
+    font-family: 'Roboto', sans-serif; 
+    font-weight: bold;
+    font-size: 20px;
+    height: 10px;
+}
+ion-content{
+    --background: #FD5E19;
+}
+#historial{
+    background-color: orange;
+    padding: 1px;
+    border-radius: 10px;
+}
+
+.custom-table {
+    background-color: transparent; 
+    border: none; 
+  }
+  
+  
+  .custom-table td,
+  .custom-table th {
+    border: none; 
+  }
+  .table-responsive {
+    max-height: 300px; 
+    overflow-x: auto; 
+  }
