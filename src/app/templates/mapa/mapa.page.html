@@ -16,15 +16,15 @@
     </div>
     <div class="row">
       <article class="col-6">
-        <ion-button expand="block" class="letra ion-button-small numeros"><ion-icon name="call-outline"></ion-icon>Policia</ion-button>
+        <ion-button expand="block" class="letra ion-button-small numeros"><ion-icon name="call-outline" (click)="callEmergency('123')"></ion-icon>Policia</ion-button>
       </article>
       <article class="col-6">
-        <ion-button expand="block" class="letra ion-button-small numeros"><ion-icon name="call-outline"></ion-icon>Urgencias</ion-button>
+        <ion-button expand="block" class="letra ion-button-small numeros"><ion-icon name="call-outline" (click)="callEmergency('123')"></ion-icon>Urgencias</ion-button>
       </article>
     </div>
     <div class="row">
       <article class="col-12 ion-text-center">
-        <ion-button  class="letra ion-button-small numeros "><ion-icon name="call-outline"></ion-icon>Bomberos</ion-button>
+        <ion-button  class="letra ion-button-small numeros " (click)="callEmergency('123')"><ion-icon name="call-outline"></ion-icon>Bomberos</ion-button>
       </article>
     </div>
   </section>

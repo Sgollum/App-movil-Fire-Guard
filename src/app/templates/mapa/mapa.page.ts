@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Platform } from '@ionic/angular';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { InteractionService } from 'src/app/services/interaction.service';
 
@@ -19,7 +20,8 @@ export class MapaPage implements OnInit {
 
   constructor(private interaction: InteractionService,
               private firebaseService: FirebaseService,
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute,
+              private platform: Platform) {}
 
   ngOnInit() {
     this.loadGoogleMapsScript().then(() => {
@@ -142,5 +144,13 @@ export class MapaPage implements OnInit {
     setTimeout(() => {
       marker.setMap(null); // Elimina el marcador después de 10 segundos
     }, 10000);
+  }
+
+  callEmergency(number: string) {
+    if (this.platform.is('cordova')) {
+      window.open(`tel:${number}`, '_system');
+    } else {
+      console.warn('La función de llamada solo está disponible en dispositivos móviles.');
+    }
   }
 }

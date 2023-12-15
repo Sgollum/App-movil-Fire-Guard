@@ -1,5 +1,7 @@
 {
   "name": "FireGuard",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
